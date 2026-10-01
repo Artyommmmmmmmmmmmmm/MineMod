@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "seregamod:block/spreader_block",
+    "side": "seregamod:block/spreader_block",
+    "top": "seregamod:block/spreader_block"
+  }
+}

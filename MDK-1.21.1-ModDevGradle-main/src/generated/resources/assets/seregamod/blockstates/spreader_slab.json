@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "seregamod:block/spreader_slab"
+    },
+    "type=double": {
+      "model": "seregamod:block/spreader_block"
+    },
+    "type=top": {
+      "model": "seregamod:block/spreader_slab_top"
+    }
+  }
+}

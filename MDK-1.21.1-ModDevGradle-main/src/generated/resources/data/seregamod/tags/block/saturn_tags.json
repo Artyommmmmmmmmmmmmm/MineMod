@@ -1,0 +1,13 @@
+{
+  "values": [
+    "seregamod:spreader_button",
+    "seregamod:spreader_door",
+    "seregamod:spreader_fence",
+    "seregamod:spreader_pressure_plate",
+    "seregamod:spreader_fence_gate",
+    "seregamod:spreader_slab",
+    "seregamod:spreader_stairs",
+    "seregamod:spreader_trapdoor",
+    "seregamod:spreader_wall"
+  ]
+}

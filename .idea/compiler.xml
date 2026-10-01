@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="com.example.examplemod.MDK-1.21.1-ModDevGradle-main" target="21" />
+      <module name="com.example.examplemod.MDK-1.21.1-ModDevGradle-main.main" target="21" />
+      <module name="com.example.examplemod.MDK-1.21.1-ModDevGradle-main.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

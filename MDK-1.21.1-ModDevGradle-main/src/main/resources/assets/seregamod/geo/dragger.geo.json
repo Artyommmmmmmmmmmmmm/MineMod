@@ -1,0 +1,172 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 16,
+				"texture_height": 16,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bone15",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-3, 9, -1], "size": [6, 2, 22], "uv": [-22, -20]}
+					]
+				},
+				{
+					"name": "bone16",
+					"parent": "bone15",
+					"pivot": [0, 12, 8],
+					"cubes": [
+						{"origin": [-1, 11, 7], "size": [2, 2, 2], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "bubbles",
+					"parent": "bone16",
+					"pivot": [0, 27, 8],
+					"cubes": [
+						{"origin": [-6, 24, 7], "size": [12, 8, 2], "uv": [-5, 0]}
+					]
+				},
+				{
+					"name": "bone",
+					"parent": "bone15",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-6, 8, -1], "size": [12, 4, 2], "uv": [-5, 0]}
+					],
+					"locators": {
+						"_null_null_objectL": [16, 0.25, 0],
+						"_null_null_objectR": [-16, 0.25, 0]
+					}
+				},
+				{
+					"name": "bone2",
+					"parent": "bone",
+					"pivot": [6, 8, 0],
+					"cubes": [
+						{"origin": [6, 8, -1], "size": [11, 2, 2], "pivot": [7, 8, 0], "rotation": [0, 0, -60], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "bone3",
+					"parent": "bone2",
+					"pivot": [11, 16, 0],
+					"cubes": [
+						{"origin": [9.34524, 5.75363, -1], "size": [2, 11, 2], "pivot": [10.25, 16, 0], "rotation": [0, 0, -32.5], "uv": [0, 0]}
+					],
+					"locators": {
+						"locator": [16, 0.25, 0]
+					}
+				},
+				{
+					"name": "bone4",
+					"parent": "bone3",
+					"pivot": [16, 7.5, 0],
+					"cubes": [
+						{"origin": [15, 0, -1], "size": [2, 8, 2], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "bone5",
+					"parent": "bone",
+					"pivot": [-6, 8, 0],
+					"cubes": [
+						{"origin": [-17, 8, -1], "size": [11, 2, 2], "pivot": [-7, 8, 0], "rotation": [0, 0, 60], "uv": [0, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "bone6",
+					"parent": "bone5",
+					"pivot": [-11, 16, 0],
+					"cubes": [
+						{"origin": [-11.34524, 5.75363, -1], "size": [2, 11, 2], "pivot": [-10.25, 16, 0], "rotation": [0, 0, 32.5], "uv": [0, 0], "mirror": true}
+					],
+					"locators": {
+						"locator2": [-16, 0.25, 0]
+					}
+				},
+				{
+					"name": "bone7",
+					"parent": "bone6",
+					"pivot": [-16, 7.5, 0],
+					"cubes": [
+						{"origin": [-17, 0, -1], "size": [2, 8, 2], "uv": [0, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "bone8",
+					"parent": "bone15",
+					"pivot": [0, 0, 20],
+					"cubes": [
+						{"origin": [-6, 8, 19], "size": [12, 4, 2], "uv": [-5, 0]}
+					],
+					"locators": {
+						"_null_null_objectL2": [16, 0.25, 20],
+						"_null_null_objectR2": [-16, 0.25, 20]
+					}
+				},
+				{
+					"name": "bone9",
+					"parent": "bone8",
+					"pivot": [6, 8, 20],
+					"cubes": [
+						{"origin": [6, 8, 19], "size": [11, 2, 2], "pivot": [7, 8, 20], "rotation": [0, 0, -60], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "bone10",
+					"parent": "bone9",
+					"pivot": [11, 16, 20],
+					"cubes": [
+						{"origin": [9.34524, 5.75363, 19], "size": [2, 11, 2], "pivot": [10.25, 16, 20], "rotation": [0, 0, -32.5], "uv": [0, 0]}
+					],
+					"locators": {
+						"locator3": [16, 0.25, 20]
+					}
+				},
+				{
+					"name": "bone11",
+					"parent": "bone10",
+					"pivot": [16, 7.5, 20],
+					"cubes": [
+						{"origin": [15, 0, 19], "size": [2, 8, 2], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "bone12",
+					"parent": "bone8",
+					"pivot": [-6, 8, 20],
+					"cubes": [
+						{"origin": [-17, 8, 19], "size": [11, 2, 2], "pivot": [-7, 8, 20], "rotation": [0, 0, 60], "uv": [0, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "bone13",
+					"parent": "bone12",
+					"pivot": [-11, 16, 20],
+					"cubes": [
+						{"origin": [-11.34524, 5.75363, 19], "size": [2, 11, 2], "pivot": [-10.25, 16, 20], "rotation": [0, 0, 32.5], "uv": [0, 0], "mirror": true}
+					],
+					"locators": {
+						"locator4": [-16, 0.25, 20]
+					}
+				},
+				{
+					"name": "bone14",
+					"parent": "bone13",
+					"pivot": [-16, 7.5, 20],
+					"cubes": [
+						{"origin": [-17, 0, 19], "size": [2, 8, 2], "uv": [0, 0], "mirror": true}
+					]
+				}
+			]
+		}
+	]
+}
