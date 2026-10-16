@@ -1,5 +1,6 @@
 package com.example.seregamod;
 
+import com.example.seregamod.block.ModBlockEntities;
 import com.example.seregamod.block.ModBlocks;
 import com.example.seregamod.client.particle.ModParticles;
 import com.example.seregamod.entity.ModEntities;
@@ -57,6 +58,7 @@ public class SeregaMod {
         ModBlocks.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }

@@ -24,7 +24,7 @@ public class DirectionalAttackAimGoal<T extends Mob> extends Goal {
     public boolean canUse() {
         if (this.mob.getTarget() != null) {
             double distance = this.mob.position().distanceTo(this.mob.getTarget().position());
-            return distance < this.distance;
+            return distance < this.distance && this.mob.hasLineOfSight(this.mob.getTarget());
         }
         return false;
     }
@@ -32,7 +32,7 @@ public class DirectionalAttackAimGoal<T extends Mob> extends Goal {
     public boolean canContinueToUse() {
         if (this.mob.getTarget() != null) {
             double distance = this.mob.position().distanceTo(this.mob.getTarget().position());
-            return distance < this.distance;
+            return distance < this.distance && this.mob.hasLineOfSight(this.mob.getTarget());
         }
         return false;
     }

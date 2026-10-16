@@ -23,7 +23,10 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.PISKA);
                 output.accept(ModBlocks.SEREGA_BLOCK);
                 output.accept(ModItems.TNTCASTER);
+
                 output.accept(ModBlocks.SPREADER_BLOCK);
+                output.accept(ModBlocks.TUMOR_BLOCK);
+
                 output.accept(ModItems.SEREGA_COCKTAIL);
                 output.accept(ModItems.GRAPLE);
                 output.accept(ModItems.CONJOINER);

@@ -18,6 +18,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(ModBlocks.SPREADER_BLOCK);
+        blockWithItem(ModBlocks.TUMOR_BLOCK);
+
         blockWithItem(ModBlocks.SEREGA_BLOCK);
         stairsBlock(ModBlocks.SPREADER_STAIRS.get(), blockTexture(ModBlocks.SPREADER_BLOCK.get()));
         slabBlock(ModBlocks.SPREADER_SLAB.get(), blockTexture(ModBlocks.SPREADER_BLOCK.get()), blockTexture(ModBlocks.SPREADER_BLOCK.get()));

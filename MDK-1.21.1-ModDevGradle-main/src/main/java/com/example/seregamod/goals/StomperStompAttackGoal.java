@@ -14,6 +14,7 @@ import net.minecraft.world.phys.Vec3;
 public class StomperStompAttackGoal extends Goal {
     private StomperEntity mob;
     private final double maxDistance = 10;
+    private final double width = 2.5;
     private double cooldown = 40;
     private final double damage = 10;
     private final double stompAnimationDuration = 10;
@@ -60,21 +61,25 @@ public class StomperStompAttackGoal extends Goal {
                 Vec3 direction = this.mob.getTarget().position().subtract(this.mob.position()).normalize();
                 AABB area = this.mob.getBoundingBox().inflate(2).expandTowards(direction.scale(10));
                 for (Entity mob: this.mob.level().getEntities(this.mob, area)) {
-                    if (!mob.getTags().contains("hivemind")) {
-                        mob.hurt(this.mob.damageSources().mobAttack(this.mob), (float) this.damage);
-                    }
-                    if (mob instanceof Player) {
-                        ((Player) mob).stopUsingItem();
-                        for (ItemStack stack : ((LivingEntity) mob).getHandSlots()) {
-                            ((Player) mob).getCooldowns().addCooldown(stack.getItem(), 30);
+                    if (GoalUtility.isTargetInFront(this.mob, mob, maxDistance, width)) {
+
+                        if (!mob.getTags().contains("hivemind")) {
+                            mob.hurt(this.mob.damageSources().mobAttack(this.mob), (float) this.damage);
                         }
+                        if (mob instanceof Player) {
+                            ((Player) mob).stopUsingItem();
+                            for (ItemStack stack : ((LivingEntity) mob).getHandSlots()) {
+                                ((Player) mob).getCooldowns().addCooldown(stack.getItem(), 30);
+                            }
+                        }
+                        mob.setDeltaMovement(mob.getDeltaMovement().add(this.mob.getLookAngle().add(0, 0.4, 0).scale(2)));
+                        if (mob.onGround() && mob instanceof Player) {
+                            Vec3 velocity = mob.getDeltaMovement();
+                            mob.setDeltaMovement(mob.getDeltaMovement().add(velocity.x*1.83, velocity.y*0.4, velocity.z*1.83));
+                        }
+                        mob.hurtMarked = true;
                     }
-                    mob.setDeltaMovement(mob.getDeltaMovement().add(this.mob.getLookAngle().add(0, 0.4, 0).scale(2)));
-                    if (mob.onGround() && mob instanceof Player) {
-                        Vec3 velocity = mob.getDeltaMovement();
-                        mob.setDeltaMovement(mob.getDeltaMovement().add(velocity.x*1.83, velocity.y*0.4, velocity.z*1.83));
-                    }
-                    mob.hurtMarked = true;
+
                 }
                 this.cooldown = 40;
                 this.stompTimer = this.stompAnimationDuration;

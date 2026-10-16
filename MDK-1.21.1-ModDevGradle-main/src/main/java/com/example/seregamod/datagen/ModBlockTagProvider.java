@@ -29,6 +29,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 //                .add(ModBlocks.BISMUTH_DEEPSLATE_ORE.get());
         tag(ModTags.Blocks.SATURN_TAG)
                 .add(ModBlocks.SPREADER_BUTTON.get())
+                .add(ModBlocks.SPREADER_BLOCK.get())
+                .add(ModBlocks.TUMOR_BLOCK.get())
                 .add(ModBlocks.SPREADER_DOOR.get())
                 .add(ModBlocks.SPREADER_FENCE.get())
                 .add(ModBlocks.SPREADER_PRESSURE_PLATE.get())

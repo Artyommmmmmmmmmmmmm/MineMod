@@ -1,6 +1,8 @@
 {
   "values": [
     "seregamod:spreader_button",
+    "seregamod:spreader_block",
+    "seregamod:tumor_block",
     "seregamod:spreader_door",
     "seregamod:spreader_fence",
     "seregamod:spreader_pressure_plate",

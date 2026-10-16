@@ -36,7 +36,7 @@ public class GrapleItem extends Item {
                 this.grapleBond = graple;
                 graple.setPlayer(player);
                 graple.setPos(player.getEyePosition());
-                graple.setDeltaMovement(player.getLookAngle().scale(0.5));
+                graple.setDeltaMovement(player.getLookAngle().scale(2.5));
                 graple.hurtMarked = true;
                 level.addFreshEntity(graple);
             }

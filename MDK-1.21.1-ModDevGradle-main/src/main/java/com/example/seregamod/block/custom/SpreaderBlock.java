@@ -1,7 +1,9 @@
 package com.example.seregamod.block.custom;
 
 import com.example.seregamod.block.ModBlocks;
+import com.example.seregamod.block.entity.SpreaderBlockEntity;
 import com.example.seregamod.util.ModTags;
+import com.mojang.authlib.properties.Property;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -14,26 +16,49 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
-public class SpreaderBlock extends Block {
+public class SpreaderBlock extends Block implements EntityBlock {
     public static final IntegerProperty ENERGY = IntegerProperty.create("energy", 0, 500);
+    public static final BooleanProperty CAN_TICK = BooleanProperty.create("cant_tick");
     public SpreaderBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(
-                this.stateDefinition.any().setValue(ENERGY, 500)
+                this.stateDefinition.any()
+                        .setValue(ENERGY, 500)
+                        .setValue(CAN_TICK, false)
         );
     }
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (state.getValue(CAN_TICK)) {
+            state.setValue(CAN_TICK, true);
+            return;
+        }
         int energy = state.getValue(ENERGY);
+
+        if (level.getBlockEntity(pos) instanceof SpreaderBlockEntity spreader) {
+            BlockPos blockPos = spreader.getStoredBlock();
+            if (blockPos != null && level.getBlockState(blockPos).isAir()) {
+//                level.destroyBlock(pos, false);
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+                return;
+            }
+        }
         if (energy < 1) {
+            if (Math.random() > 0.99) {
+                level.setBlock(pos, ModBlocks.TUMOR_BLOCK.get().defaultBlockState(), 3);
+            }
             return;
         }
         int newEnergy = energy-10;
+//        !!!! -10
         boolean airNear = false;
         BlockState NUState = Blocks.AIR.defaultBlockState();
         BlockState NDState = Blocks.AIR.defaultBlockState();
@@ -119,39 +144,87 @@ public class SpreaderBlock extends Block {
 
             BlockPos neighborPos = pos.relative(direction);
             BlockState neighborState = level.getBlockState(neighborPos);
-            if (!neighborState.isAir() && !neighborState.is(ModBlocks.SPREADER_BLOCK.get())
-                    && !neighborState.is(Blocks.OAK_LEAVES) && !neighborState.is(ModTags.Blocks.SATURN_TAG)) {
-                if (direction == Direction.UP && moveUp) {
+            if (!neighborState.isAir() && !neighborState.is(ModTags.Blocks.SATURN_TAG)) {
+                if (direction == Direction.UP && moveUp && isInfestable(neighborState)) {
                     level.setBlock(neighborPos, ModBlocks.SPREADER_BLOCK.get().defaultBlockState().setValue(ENERGY, newEnergy), 3);
-                } else if (direction == Direction.DOWN && moveDown) {
+                    if (level.getBlockEntity(neighborPos) instanceof SpreaderBlockEntity spreader) {
+                        if (level.getBlockEntity(pos) instanceof SpreaderBlockEntity spreaderOG) {
+                            spreader.setStoredBlock(spreaderOG.getStoredBlock());
+                        }
+                    }
+                } else if (direction == Direction.DOWN && moveDown && isInfestable(neighborState)) {
                     level.setBlock(neighborPos, ModBlocks.SPREADER_BLOCK.get().defaultBlockState().setValue(ENERGY, newEnergy), 3);
-                } else if (direction == Direction.NORTH && moveNorth) {
+                    if (level.getBlockEntity(neighborPos) instanceof SpreaderBlockEntity spreader) {
+                        if (level.getBlockEntity(pos) instanceof SpreaderBlockEntity spreaderOG) {
+                            spreader.setStoredBlock(spreaderOG.getStoredBlock());
+                        }
+                    }
+                } else if (direction == Direction.NORTH && moveNorth && isInfestable(neighborState)) {
                     level.setBlock(neighborPos, ModBlocks.SPREADER_BLOCK.get().defaultBlockState().setValue(ENERGY, newEnergy), 3);
-                } else if (direction == Direction.SOUTH && moveSouth) {
+                    if (level.getBlockEntity(neighborPos) instanceof SpreaderBlockEntity spreader) {
+                        if (level.getBlockEntity(pos) instanceof SpreaderBlockEntity spreaderOG) {
+                            spreader.setStoredBlock(spreaderOG.getStoredBlock());
+                        }
+                    }
+                } else if (direction == Direction.SOUTH && moveSouth && isInfestable(neighborState)) {
                     level.setBlock(neighborPos, ModBlocks.SPREADER_BLOCK.get().defaultBlockState().setValue(ENERGY, newEnergy), 3);
-                } else if (direction == Direction.EAST && moveEast) {
+                    if (level.getBlockEntity(neighborPos) instanceof SpreaderBlockEntity spreader) {
+                        if (level.getBlockEntity(pos) instanceof SpreaderBlockEntity spreaderOG) {
+                            spreader.setStoredBlock(spreaderOG.getStoredBlock());
+                        }
+                    }
+                } else if (direction == Direction.EAST && moveEast && isInfestable(neighborState)) {
                     level.setBlock(neighborPos, ModBlocks.SPREADER_BLOCK.get().defaultBlockState().setValue(ENERGY, newEnergy), 3);
-                } else if (direction == Direction.WEST && moveWest) {
+                    if (level.getBlockEntity(neighborPos) instanceof SpreaderBlockEntity spreader) {
+                        if (level.getBlockEntity(pos) instanceof SpreaderBlockEntity spreaderOG) {
+                            spreader.setStoredBlock(spreaderOG.getStoredBlock());
+                        }
+                    }
+                } else if (direction == Direction.WEST && moveWest && isInfestable(neighborState)) {
                     level.setBlock(neighborPos, ModBlocks.SPREADER_BLOCK.get().defaultBlockState().setValue(ENERGY, newEnergy), 3);
+                    if (level.getBlockEntity(neighborPos) instanceof SpreaderBlockEntity spreader) {
+                        if (level.getBlockEntity(pos) instanceof SpreaderBlockEntity spreaderOG) {
+                            spreader.setStoredBlock(spreaderOG.getStoredBlock());
+                        }
+                    }
                 }
 
             }
         }
+        level.setBlock(pos, ModBlocks.SPREADER_BLOCK.get().defaultBlockState().setValue(ENERGY, 500), 3);
     }
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
-        level.scheduleTick(pos, this, 2);
+        level.scheduleTick(pos, this, 10);
+        if (level.getBlockEntity(pos) instanceof SpreaderBlockEntity spreader) {
+            if (spreader.getStoredBlock() == null) {
+                spreader.setStoredBlock(pos);
+            }
+        }
         super.onPlace(state, level, pos, oldState, movedByPiston);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(ENERGY);
+        builder.add(ENERGY).add(CAN_TICK);
     }
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
-        level.scheduleTick(pos, this, 2);
+        if (!level.getBlockTicks().hasScheduledTick(pos, this)) {
+            level.scheduleTick(pos, this, 2);
+        }
+
         super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new SpreaderBlockEntity(pos, state);
+    }
+
+
+    public boolean isInfestable(BlockState state) {
+        return state != Blocks.FIRE.defaultBlockState();
     }
 
 //    @Override

@@ -49,17 +49,28 @@ public class GrapleEntity extends Entity {
             this.setPos(fixedPosition);
             }
         if (draggedPlayer != null && fixedPosition != null) {
-            System.out.println((draggedPlayer));
-//            draggedPlayer.teleportTo(fixedPosition.x, fixedPosition.y, fixedPosition.z);
-            draggedPlayer.setDeltaMovement(fixedPosition.subtract(draggedPlayer.getEyePosition())
-                    .scale(draggedPlayer.getEyePosition().distanceTo(fixedPosition)*0.025)
-            );
-            draggedPlayer.hurtMarked = true;
-            draggedPlayer.hasImpulse = true;
-//            draggedPlayer.setOnGround(false);
-//            draggedPlayer.verticalCollision = false;
-//                draggedPlayer.setDeltaMovement(new Vec3(0, 4, 0));
-//            draggedPlayer.move(MoverType.SELF, draggedPlayer.getDeltaMovement());
+//            draggedPlayer.setDeltaMovement(fixedPosition.subtract(draggedPlayer.getEyePosition())
+//                    .scale(draggedPlayer.getEyePosition().distanceTo(fixedPosition)*0.025)
+//            );
+//            if (draggedPlayer.getDeltaMovement().length() > 3) {
+//                draggedPlayer.setDeltaMovement(draggedPlayer.getDeltaMovement().normalize().scale(2));
+//            }
+            if (this.distanceTo(draggedPlayer) > 3) {
+                draggedPlayer.setDeltaMovement(this.position().subtract(draggedPlayer.position()));
+                System.out.println(draggedPlayer.getDeltaMovement().normalize().dot(draggedPlayer.getLookAngle()));
+//                Vec3 direction = draggedPlayer.position().subtract(this.position()).normalize();
+//                double projection = draggedPlayer.getDeltaMovement().dot(direction);
+//                if (projection > 0.2) {
+//                    double maxProjection = Math.min(projection, draggedPlayer.getDeltaMovement().length());
+//                    draggedPlayer.setDeltaMovement(draggedPlayer.getDeltaMovement().subtract(direction.scale(maxProjection)));
+//                    System.out .println(projection);
+//                }
+                draggedPlayer.hurtMarked = true;
+            } else {
+                draggedPlayer.setDeltaMovement(Vec3.ZERO);
+            }
+//            draggedPlayer.hurtMarked = true;
+//            draggedPlayer.hasImpulse = true;
         }
     }
 

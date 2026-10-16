@@ -27,7 +27,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
 //        dropSelf(ModBlocks.BISMUTH_BLOCK.get());
-         dropSelf(ModBlocks.SPREADER_BLOCK.get());
+        dropSelf(ModBlocks.SPREADER_BLOCK.get());
+        dropSelf(ModBlocks.TUMOR_BLOCK.get());
 //
         add(ModBlocks.SEREGA_BLOCK.get(),
                 block -> createMultipleOreDrops(ModBlocks.SEREGA_BLOCK.get(), ModItems.PISKA.get(), 6, 6));

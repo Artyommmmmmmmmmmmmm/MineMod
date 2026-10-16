@@ -2,6 +2,7 @@ package com.example.seregamod.block;
 
 import com.example.seregamod.SeregaMod;
 import com.example.seregamod.block.custom.SpreaderBlock;
+import com.example.seregamod.block.custom.TumorBlock;
 import com.example.seregamod.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -29,6 +30,11 @@ public class ModBlocks {
             () -> new SpreaderBlock(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().sound(SoundType.AMETHYST).mapColor(MapColor.COLOR_ORANGE)
             ));
+    public static final DeferredBlock<Block> TUMOR_BLOCK = registerBlock("tumor_block",
+            () -> new TumorBlock(BlockBehaviour.Properties.of()
+                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.AMETHYST).mapColor(MapColor.COLOR_ORANGE)
+            ));
+
     public static final DeferredBlock<StairBlock> SPREADER_STAIRS = registerBlock("spreader_stairs",
             () -> new StairBlock(ModBlocks.SPREADER_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().sound(SoundType.AMETHYST).mapColor(MapColor.COLOR_ORANGE)));

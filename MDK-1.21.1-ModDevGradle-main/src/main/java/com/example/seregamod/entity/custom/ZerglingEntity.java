@@ -1,6 +1,7 @@
 package com.example.seregamod.entity.custom;
 
 import com.example.seregamod.client.fx.BoneBoundEffectExecutor;
+import com.example.seregamod.goals.DigToTargetGoal;
 import com.example.seregamod.goals.DirectionalAttackAimGoal;
 import com.example.seregamod.goals.FollowGoal;
 import com.example.seregamod.goals.ZerglingLungeAttackGoal;
@@ -36,6 +37,8 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 public class ZerglingEntity extends Monster implements GeoEntity {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private Vec3 lastPos = Vec3.ZERO;
+
     public Vec3 leftClawPos;
     public Vec3 rightClawPos;
     private FX fx;
@@ -92,6 +95,7 @@ public class ZerglingEntity extends Monster implements GeoEntity {
 //        this.goalSelector.addGoal(0, new PullGoal(this));
 //        this.goalSelector.addGoal(0, new JumpAttackGoal(this));
         this.goalSelector.addGoal(2, new ZerglingLungeAttackGoal(this));
+        this.goalSelector.addGoal(2, new DigToTargetGoal(this, 2, 0, 1, 0));
         this.goalSelector.addGoal(3, new DirectionalAttackAimGoal(this, 5));
         this.goalSelector.addGoal(4, new FollowGoal(this, 2f, true));
         super.registerGoals();
@@ -108,6 +112,9 @@ public class ZerglingEntity extends Monster implements GeoEntity {
 
     @Override
     public void tick() {
+
+        double movement = this.position().distanceToSqr(this.lastPos);
+
             if (this.level().isClientSide()) {
                 if (this.isLungeActive()) {
                     if (this.leftClawPos != null && this.rightClawPos != null) {
@@ -178,6 +185,10 @@ public class ZerglingEntity extends Monster implements GeoEntity {
                     }
                 }
             }
+
+        this.lastPos = this.position();
+
+
         super.tick();
     }
     @Override

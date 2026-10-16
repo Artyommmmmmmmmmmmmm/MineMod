@@ -27,6 +27,16 @@ sourceSets.main.resources {
 }
 
 repositories {
+    exclusiveContent {
+        forRepository {
+            maven {
+                url "https://cursemaven.com"
+            }
+        }
+        filter {
+            includeGroup "curse.maven"
+        }
+    }
     maven {
         name = 'GeckoLib1'
         url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
@@ -131,7 +141,7 @@ dependencies {
     implementation("com.lowdragmc.ldlib2:ldlib2-neoforge-${minecraft_version}:${ldlib2_version}:all") {
         transitive = false
     }
-
+    localRuntime "curse.maven:worldedit-225608:5830452"
     // Сам Photon
     implementation("com.lowdragmc.photon:photon-neoforge-${minecraft_version}:${photon_version}") {
         transitive = false

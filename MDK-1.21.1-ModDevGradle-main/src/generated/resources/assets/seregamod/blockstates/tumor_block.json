@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "seregamod:block/tumor_block"
+    }
+  }
+}
